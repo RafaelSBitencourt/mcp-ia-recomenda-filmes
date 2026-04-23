@@ -117,7 +117,7 @@ server.registerTool(
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("MCP Movie Server a correr via Stdio");
+  console.error("MCP Movie Server rodando via Stdio");
 }
 
 main().catch(console.error);
