@@ -14,14 +14,14 @@ O projeto segue uma arquitetura modular baseada no padrão do protocolo MCP:
 
 ## 📂 Estrutura de Pastas
 
-ˋˋˋ
+```
 src/
-├── services/ # Lógica de comunicação com APIs externas (TMDb)
-├── tools/ # Definição e schemas (Zod) das ferramentas MCP
-├── public/ # Interface Web (HTML/CSS)
-├── server.ts # Inicialização do Servidor MCP
-└── client.ts # Cliente Express (Web) e interface de usuário
-ˋˋˋ
+├── services/        # Lógica de comunicação com APIs externas (TMDb)
+├── tools/           # Definição e schemas (Zod) das ferramentas MCP
+├── public/          # Interface Web (HTML/CSS)
+├── server.ts        # Inicialização do Servidor MCP
+└── client.ts        # Cliente Express (Web) e interface de usuário
+```
 
 ## 🛠️ Pré-requisitos
 
