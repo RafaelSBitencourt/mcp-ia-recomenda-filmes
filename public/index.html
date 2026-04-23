@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MCP Movie Finder</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+      }
+      input {
+        padding: 10px;
+        width: 70%;
+      }
+      button {
+        padding: 10px;
+        cursor: pointer;
+      }
+      #resultados {
+        margin-top: 20px;
+        white-space: pre-wrap;
+        background: #f4f4f4;
+        padding: 15px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎬 Recomendador de Filmes</h1>
+    <input
+      type="text"
+      id="movieInput"
+      placeholder="Digite o nome do filme..."
+    />
+    <button onclick="buscar()">Pesquisar</button>
+
+    <div id="resultados">Os resultados aparecerão aqui...</div>
+
+    <script>
+      async function buscar() {
+        const titulo = document.getElementById("movieInput").value;
+        const divResultados = document.getElementById("resultados");
+
+        divResultados.innerText = "Buscando...";
+
+        const response = await fetch("/api/buscar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ titulo }),
+        });
+
+        const data = await response.json();
+        // Pegamos o texto que o MCP retornou
+        divResultados.innerText = data.content[0].text;
+      }
+    </script>
+  </body>
+</html>

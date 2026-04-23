@@ -75,6 +75,44 @@ server.registerTool(
   },
 );
 
+server.registerTool(
+  "get_recommendations",
+  {
+    description:
+      "Gera uma lista de filmes recomendados com base em um ID de filme existente",
+    inputSchema: {
+      movieId: z.number().describe("O ID numérico do filme no TMDb"),
+    },
+  },
+  async ({ movieId }) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/movie/${movieId}/recommendations`,
+        {
+          params: { api_key: TMDB_API_KEY, language: "pt-BR" },
+        },
+      );
+
+      const recs = response.data.results
+        .slice(0, 3)
+        .map(
+          (m: any) =>
+            `- ${m.title} (ID: ${m.id}): ${m.overview.substring(0, 100)}...`,
+        );
+
+      return {
+        content: [
+          { type: "text", text: `Filmes recomendados:\n${recs.join("\n")}` },
+        ],
+      };
+    } catch (error: any) {
+      return {
+        content: [{ type: "text", text: "Erro ao buscar recomendações." }],
+      };
+    }
+  },
+);
+
 // 2. Conexão via Transporte Stdio
 async function main() {
   const transport = new StdioServerTransport();
