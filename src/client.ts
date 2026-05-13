@@ -42,7 +42,7 @@ async function startMcpAndServer() {
 
     try {
       const response = await mcpClient.callTool({
-        name: "search_movie",
+        name: "search_movie_by_title",
         arguments: { title: titulo },
       });
       res.json(response);
