@@ -53,7 +53,13 @@
 
         const data = await response.json();
         // Pegamos o texto que o MCP retornou
-        divResultados.innerText = data.content[0].text;
+        const results = JSON.parse(data.content[0].text);
+        divResultados.innerHTML = results
+          .map(
+            (item) =>
+              `<strong>${item.title}</strong> (${item.release_date}) - ${item.overview}`,
+          )
+          .join("<br><br>");
       }
     </script>
   </body>
